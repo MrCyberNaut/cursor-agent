@@ -1,0 +1,38 @@
+{
+  "name": "ar-business-card-sawant-drop",
+  "version": "1.0.0",
+  "description": "AR Business Card experience using WebAR - The Sawant Drop",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "dev:node": "npx http-server -p 8000 -c-1",
+    "build": "echo 'Static site - no build needed'",
+    "preview": "python -m http.server 8080",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "webAR",
+    "augmented-reality",
+    "business-card",
+    "aframe",
+    "mindar",
+    "3d",
+    "three.js"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ar-business-card.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/ar-business-card/issues"
+  },
+  "homepage": "https://yourusername.github.io/ar-business-card/"
+}

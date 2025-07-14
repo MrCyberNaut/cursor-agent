@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Sawant (Sample Contact)
+ORG:Tech Innovator
+TITLE:Full Stack Developer & AR Enthusiast
+EMAIL:sawant@example.com
+TEL:+91-9876543210
+URL:https://sawant.dev
+ADR:;;123 Tech Street;Bangalore;Karnataka;560001;India
+NOTE:LinkedIn: https://linkedin.com/in/sawant-profile\nGitHub: https://github.com/sawant-tech\nTwitter: https://twitter.com/sawant_tech\n\nMet via AR Business Card - The Sawant Drop 🚀
+PHOTO:https://example.com/profile-photo.jpg
+END:VCARD

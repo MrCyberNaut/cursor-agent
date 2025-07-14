@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Business Card - The Sawant Drop</title>
+    
+    <!-- A-Frame and MindAR -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Calibrating Card...</p>
+        </div>
+    </div>
+
+    <!-- AR Scene -->
+    <a-scene 
+        mindar-image="imageTargetSrc: ./assets/business-card-marker.mind; 
+                     filterMinCF:0.0001; 
+                     filterBeta: 0.01;
+                     warmupTolerance: 5;
+                     missTolerance: 5"
+        color-space="sRGB" 
+        renderer="colorManagement: true; physicallyCorrectLights: true"
+        vr-mode-ui="enabled: false" 
+        device-orientation-permission-ui="enabled: false"
+        id="ar-scene">
+        
+        <!-- Assets -->
+        <a-assets>
+            <!-- 3D Models -->
+            <a-asset-item id="caricature-model" src="./assets/caricature.glb"></a-asset-item>
+            <a-asset-item id="room-model" src="./assets/isometric-room.glb"></a-asset-item>
+            
+            <!-- Social Icons (using simple geometric primitives for now) -->
+            <a-mixin id="social-icon" 
+                     geometry="primitive: cylinder; height: 0.1; radius: 0.15"
+                     material="color: #ffffff; roughness: 0.2; metalness: 0.8"
+                     animation__hover="property: scale; to: 1.2 1.2 1.2; startEvents: mouseenter; dur: 200"
+                     animation__unhover="property: scale; to: 1 1 1; startEvents: mouseleave; dur: 200">
+            </a-mixin>
+        </a-assets>
+
+        <!-- AR Camera -->
+        <a-camera 
+            position="0 0 0" 
+            look-controls="enabled: false" 
+            cursor="fuse: false; rayOrigin: mouse;"
+            raycaster="far: 10000; objects: .clickable">
+        </a-camera>
+
+        <!-- AR Content Anchor -->
+        <a-entity id="ar-anchor" mindar-image-target="targetIndex: 0">
+            
+            <!-- 3D Caricature -->
+            <a-entity 
+                id="caricature"
+                gltf-model="#caricature-model"
+                position="0 0.5 0"
+                scale="0.5 0.5 0.5"
+                rotation="0 180 0"
+                class="clickable"
+                data-action="website"
+                animation__float="property: position; 
+                                to: 0 0.7 0; 
+                                direction: alternate; 
+                                dur: 3000; 
+                                loop: true; 
+                                easing: easeInOutSine">
+            </a-entity>
+
+            <!-- 3D Isometric Room -->
+            <a-entity 
+                id="room"
+                gltf-model="#room-model"
+                position="0 -0.5 -1"
+                scale="0.3 0.3 0.3"
+                rotation="0 0 0">
+            </a-entity>
+
+            <!-- Social Icons arranged in a circle -->
+            <a-entity id="social-icons">
+                <!-- LinkedIn -->
+                <a-entity 
+                    mixin="social-icon"
+                    position="-0.8 0.3 0.2"
+                    material="color: #0077b5"
+                    class="clickable"
+                    data-action="linkedin">
+                    <a-text 
+                        value="in" 
+                        position="0 0 0.06" 
+                        align="center" 
+                        color="white" 
+                        scale="0.8 0.8 0.8">
+                    </a-text>
+                </a-entity>
+
+                <!-- GitHub -->
+                <a-entity 
+                    mixin="social-icon"
+                    position="0.8 0.3 0.2"
+                    material="color: #333333"
+                    class="clickable"
+                    data-action="github">
+                    <a-text 
+                        value="GH" 
+                        position="0 0 0.06" 
+                        align="center" 
+                        color="white" 
+                        scale="0.8 0.8 0.8">
+                    </a-text>
+                </a-entity>
+
+                <!-- Email -->
+                <a-entity 
+                    mixin="social-icon"
+                    position="0 0.8 0.2"
+                    material="color: #ea4335"
+                    class="clickable"
+                    data-action="email">
+                    <a-text 
+                        value="@" 
+                        position="0 0 0.06" 
+                        align="center" 
+                        color="white" 
+                        scale="1.2 1.2 1.2">
+                    </a-text>
+                </a-entity>
+
+                <!-- Twitter/X -->
+                <a-entity 
+                    mixin="social-icon"
+                    position="0 -0.2 0.2"
+                    material="color: #000000"
+                    class="clickable"
+                    data-action="twitter">
+                    <a-text 
+                        value="X" 
+                        position="0 0 0.06" 
+                        align="center" 
+                        color="white" 
+                        scale="1 1 1">
+                    </a-text>
+                </a-entity>
+            </a-entity>
+
+            <!-- Add to Contacts Button -->
+            <a-entity 
+                id="add-contact-btn"
+                geometry="primitive: box; width: 1; height: 0.3; depth: 0.1"
+                material="color: #4f46e5; roughness: 0.2"
+                position="0 -0.8 0.3"
+                class="clickable"
+                data-action="add-contact"
+                animation__hover="property: material.color; to: #6366f1; startEvents: mouseenter; dur: 200"
+                animation__unhover="property: material.color; to: #4f46e5; startEvents: mouseleave; dur: 200">
+                
+                <a-text 
+                    value="Add to Contacts" 
+                    position="0 0 0.06" 
+                    align="center" 
+                    color="white" 
+                    scale="0.8 0.8 0.8">
+                </a-text>
+            </a-entity>
+
+            <!-- Ambient lighting -->
+            <a-light type="ambient" color="#404040" intensity="0.4"></a-light>
+            <a-light type="directional" position="2 4 5" intensity="0.6" color="#ffffff"></a-light>
+        </a-entity>
+
+        <!-- Dark background -->
+        <a-sky color="#0a0a0a"></a-sky>
+    </a-scene>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
