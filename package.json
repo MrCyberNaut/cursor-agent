@@ -1,0 +1,19 @@
+{
+  "name": "ar-business-card",
+  "version": "0.1.0",
+  "description": "WebAR experience for personalized business card (The Sawant Drop)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "optimize": "node scripts/optimise-gltf.mjs"
+  },
+  "dependencies": {
+    "aframe": "^1.5.0"
+  },
+  "devDependencies": {
+    "svgexport": "^0.4.2",
+    "typescript": "^5.2.0",
+    "vite": "^4.4.0"
+  }
+}

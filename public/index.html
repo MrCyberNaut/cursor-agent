@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AR Business Card — The Sawant Drop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- A-Frame & MindAR -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.7/dist/mindar-image-aframe.prod.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- AR Scene -->
+    <a-scene
+      mindar-image="imageTargetSrc: ./mindar/targets.mind; uiScanning: yes;"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+      renderer="colorManagement: true;">
+
+      <a-assets>
+        <!-- Placeholder for preloaded assets (models, textures) -->
+      </a-assets>
+
+      <!-- Camera with cursor for interaction -->
+      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse"></a-camera>
+
+      <!-- Anchor for tracked image (index 0) -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!-- Placeholder entities (avatar, icons, room) will be injected by main.ts -->
+        <a-plane color="#2E90FA" opacity="0.6" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+    </a-scene>
+
+    <!-- Project entry point -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
