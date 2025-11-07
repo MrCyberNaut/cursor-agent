@@ -11,7 +11,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from pairs_trading_bot import PairsTradingStrategy, Backtester, test_stationarity
-from scipy import stats
 
 
 def generate_synthetic_pair(n_days=500, drift=0.0001, volatility=0.02, 
@@ -77,7 +76,11 @@ def demo_pairs_trading():
     
     # Create a modified strategy class that uses pre-loaded data
     class SyntheticPairsTradingStrategy(PairsTradingStrategy):
-        """Modified strategy that uses synthetic data instead of downloading."""
+        """Modified strategy that uses synthetic data instead of downloading.
+        
+        Note: We skip parent __init__ because we're using pre-loaded synthetic data
+        instead of the parent's data fetching and date handling logic.
+        """
         
         def __init__(self, data: pd.DataFrame):
             self.stock1 = 'STOCK_A'

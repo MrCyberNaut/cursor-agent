@@ -10,7 +10,6 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
-import seaborn as sns
 from statsmodels.tsa.stattools import adfuller, coint
 from scipy import stats
 from datetime import datetime, timedelta

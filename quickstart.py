@@ -61,7 +61,11 @@ def main():
     
     # Create strategy with synthetic data
     class DemoStrategy(PairsTradingStrategy):
+        """Demo strategy class that uses synthetic data instead of downloading from API."""
+        
         def __init__(self, data):
+            # Note: We intentionally skip parent __init__ here because we're using
+            # pre-loaded synthetic data instead of the parent's data fetching logic
             self.stock1 = 'STOCK_A'
             self.stock2 = 'STOCK_B'
             self.price_data = data
